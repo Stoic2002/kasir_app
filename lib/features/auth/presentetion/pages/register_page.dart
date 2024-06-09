@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kasir_app/core/assets/assets.gen.dart';
-import 'package:kasir_app/core/constants/app_colors.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/text_field.dart';
 
@@ -29,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Navigator.pop(context);
                   },
                   child: CircleAvatar(
-                    backgroundColor: Colors.grey[200],
+                    backgroundColor: Colors.grey[210],
                     child: Icon(
                       Icons.arrow_back,
                       size: 20,

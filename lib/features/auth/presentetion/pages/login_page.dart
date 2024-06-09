@@ -3,6 +3,8 @@ import 'package:kasir_app/core/assets/assets.gen.dart';
 import 'package:kasir_app/features/auth/presentetion/pages/register_page.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/text_field.dart';
+import 'package:kasir_app/features/home/presentetion/pages/home_page.dart';
+import 'package:kasir_app/features/home/presentetion/pages/main_navigation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -96,7 +98,16 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 25.0,
               ),
-              QButton(label: 'Login', onPressed: () => {}),
+              QButton(
+                  label: 'Login',
+                  onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const BasicMainNavigationView()),
+                        )
+                      }),
               const SizedBox(height: 15.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
