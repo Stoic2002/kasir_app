@@ -64,7 +64,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 ],
               ),
               const SizedBox(height: 25.0),
-              QButton(label: 'Login', onPressed: () => {}),
+              QButton(label: 'Print', onPressed: () => {}),
             ],
           ),
         ),
