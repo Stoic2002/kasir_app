@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kasir_app/core/assets/assets.gen.dart';
 import 'package:kasir_app/core/constants/app_colors.dart';
+import 'package:kasir_app/features/history/presentetion/pages/history_page.dart';
 import 'package:kasir_app/features/home/presentetion/pages/home_page.dart';
+import 'package:kasir_app/features/income/presentetion/pages/income_page.dart';
+import 'package:kasir_app/features/profile/presentetion/pages/profile_page.dart';
 
 class BasicMainNavigationView extends StatefulWidget {
   const BasicMainNavigationView({Key? key}) : super(key: key);
@@ -16,10 +19,10 @@ class _BasicMainNavigationViewState extends State<BasicMainNavigationView> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text('Favorites'),
+    IncomePage(),
     Text('Add'),
-    Text('Search'),
-    Text('Profile'),
+    HistoryPage(),
+    ProfilePage()
   ];
 
   void _onItemTapped(int index) {
@@ -52,7 +55,7 @@ class _BasicMainNavigationViewState extends State<BasicMainNavigationView> {
                   ),
                   BottomNavigationBarItem(
                     icon: Assets.icons.category.image(color: Colors.white),
-                    label: 'Category',
+                    label: 'Income',
                   ),
                   BottomNavigationBarItem(
                     icon: Assets.icons.vector.image(color: Colors.white),
@@ -60,7 +63,7 @@ class _BasicMainNavigationViewState extends State<BasicMainNavigationView> {
                   ),
                   BottomNavigationBarItem(
                     icon: Assets.icons.bookmark.image(color: Colors.white),
-                    label: 'Bookmark',
+                    label: 'History',
                   ),
                   BottomNavigationBarItem(
                     icon: Assets.icons.profile.image(color: Colors.white),
