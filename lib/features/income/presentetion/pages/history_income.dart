@@ -57,7 +57,9 @@ class _HistoryIncomeState extends State<HistoryIncome> {
               child: ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
-                  return TransactionListItem(transaction: transactions[index]);
+                  return TransactionListItem(
+                    transaction: transactions[index],
+                  );
                 },
               ),
             ),

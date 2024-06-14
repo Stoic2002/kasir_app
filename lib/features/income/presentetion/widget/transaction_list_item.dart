@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kasir_app/features/history/presentetion/pages/transaction_page.dart';
 
 class Transaction {
   final String id;
@@ -15,8 +14,9 @@ class Transaction {
 
 class TransactionListItem extends StatelessWidget {
   final Transaction transaction;
+  final VoidCallback? onTap;
 
-  TransactionListItem({required this.transaction});
+  TransactionListItem({required this.transaction, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,7 @@ class TransactionListItem extends StatelessWidget {
       child: Column(
         children: [
           InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TransactionPage()),
-              );
-            },
+            onTap: onTap,
             child: Row(
               children: [
                 Container(

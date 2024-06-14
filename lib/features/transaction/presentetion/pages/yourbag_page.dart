@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
 import 'package:kasir_app/features/history/presentetion/widget/transaction_item.dart';
+import 'package:kasir_app/features/transaction/presentetion/pages/product_page.dart';
 
-class TransactionPage extends StatefulWidget {
-  const TransactionPage({super.key});
+class YourbagPage extends StatefulWidget {
+  const YourbagPage({super.key});
 
   @override
-  State<TransactionPage> createState() => _TransactionPageState();
+  State<YourbagPage> createState() => _YourbagPageState();
 }
 
-class _TransactionPageState extends State<TransactionPage> {
+class _YourbagPageState extends State<YourbagPage> {
   @override
   Widget build(BuildContext context) {
     final List<Transaction> transactions = List.generate(
@@ -19,7 +20,7 @@ class _TransactionPageState extends State<TransactionPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Transaction 003',
+          'Your bag',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
         ),
         leading: IconButton(
@@ -38,11 +39,18 @@ class _TransactionPageState extends State<TransactionPage> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            
             children: [
               Column(
                 children: transactions.map((transaction) {
                   return TransactionItem(
                     transaction: transaction,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ProductPage()),
+                      );
+                    },
                   );
                 }).toList(),
               ),
@@ -66,7 +74,7 @@ class _TransactionPageState extends State<TransactionPage> {
                 ],
               ),
               const SizedBox(height: 25.0),
-              QButton(label: 'Print', onPressed: () => {}),
+              QButton(label: 'Checkout', onPressed: () => {}),
             ],
           ),
         ),
