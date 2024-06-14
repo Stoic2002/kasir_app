@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasir_app/features/history/presentetion/pages/transaction_page.dart';
 import 'package:kasir_app/features/income/presentetion/widget/transaction_list_item.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -41,7 +42,16 @@ class _HistoryPageState extends State<HistoryPage> {
               SizedBox(height: 5),
               Column(
                 children: transactions.map((transaction) {
-                  return TransactionListItem(transaction: transaction);
+                  return TransactionListItem(
+                    transaction: transaction,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TransactionPage()),
+                      );
+                    },
+                  );
                 }).toList(),
               ),
               Text(
@@ -54,9 +64,18 @@ class _HistoryPageState extends State<HistoryPage> {
               SizedBox(height: 5),
               Column(
                 children: transactions.map((transaction) {
-                  return TransactionListItem(transaction: transaction);
+                  return TransactionListItem(
+                      transaction: transaction,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TransactionPage()),
+                        );
+                      });
                 }).toList(),
               ),
+              const SizedBox(height: 60.0),
             ],
           ),
         ),

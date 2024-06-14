@@ -30,7 +30,7 @@ class QButton extends StatelessWidget {
   Widget build(BuildContext context) {
     double widgetWidth = width ?? MediaQuery.of(context).size.width;
     double widgetHeight = 51.0;
-    double widgetFontSize = 16.0;
+    double widgetFontSize = 15.0;
     double widgetIconSize = 24.0;
 
     widgetHeight = height ?? widgetHeight;
@@ -62,9 +62,7 @@ class QButton extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: fontSize ?? widgetFontSize,
-                  color: Colors.white),
+                  fontSize: fontSize ?? widgetFontSize, color: Colors.white),
             ),
             if (spaceBetween && sufixIcon != null) Spacer(),
             if (sufixIcon != null) ...[

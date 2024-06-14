@@ -5,6 +5,7 @@ import 'package:kasir_app/features/history/presentetion/pages/history_page.dart'
 import 'package:kasir_app/features/home/presentetion/pages/home_page.dart';
 import 'package:kasir_app/features/income/presentetion/pages/income_page.dart';
 import 'package:kasir_app/features/profile/presentetion/pages/profile_page.dart';
+import 'package:kasir_app/features/transaction/presentetion/pages/new_transaction_page.dart';
 
 class BasicMainNavigationView extends StatefulWidget {
   final int currentTab;
@@ -22,7 +23,7 @@ class _BasicMainNavigationViewState extends State<BasicMainNavigationView> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     IncomePage(),
-    Text('Add'),
+    NewTransactionPage(),
     HistoryPage(),
     ProfilePage()
   ];
