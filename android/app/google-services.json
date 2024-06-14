@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "712946757713",
+    "project_id": "e-kasir-df780",
+    "storage_bucket": "e-kasir-df780.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712946757713:android:ee600a900b4eb3fc194870",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz9IdONj8_GJRvYwnjnHk2VSRxCao5Eao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712946757713:android:de32d4ed4a4e76d0194870",
+        "android_client_info": {
+          "package_name": "com.example.kasir_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz9IdONj8_GJRvYwnjnHk2VSRxCao5Eao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

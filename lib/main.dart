@@ -1,56 +1,46 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kasir_app/features/auth/presentetion/pages/splash_screen_page.dart';
-import 'package:kasir_app/features/auth/presentetion/pages/welcome_screen_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:kasir_app/core/router/app_router.dart';
+import 'package:kasir_app/features/auth/data/datasources/auth_method.dart';
+import 'package:kasir_app/features/auth/presentetion/bloc/login/login_bloc.dart';
+import 'package:kasir_app/features/auth/presentetion/bloc/register/register_bloc.dart';
+import 'package:kasir_app/firebase_options.dart';
 
 void main() async {
-  runMainApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
 }
 
-runMainApp() async {
-  return runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MyApp> with WidgetsBindingObserver {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      Navigator.of(context).pushReplacementNamed('/profile');
-    }
-  }
-
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'E Kasir',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    final appRouter = AppRouter();
+    final router = appRouter.router;
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => RegisterBloc(AuthMethod()),
+        ),
+        BlocProvider(
+          create: (context) => LoginBloc(AuthMethod()),
+        ),
+      ],
+      child: MaterialApp.router(
+        theme: ThemeData(
+          fontFamily: GoogleFonts.poppins().fontFamily,
+        ),
+        debugShowCheckedModeBanner: false,
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
       ),
-      home: const WelcomeScreenPage(),
-      onGenerateRoute: (routeSettings) {
-        print(routeSettings.name);
-        return null;
-      },
     );
   }
 }

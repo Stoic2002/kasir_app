@@ -11,26 +11,28 @@ class QTextField extends StatefulWidget {
   final bool enabled;
   final int? maxLength;
   final IconData? prefixIcon;
-  final IconData? suffixIcon;
-  final Function(String) onChanged;
+  final Widget? suffixIcon;
+  final Function(String)? onChanged;
   final Function(String)? onSubmitted;
+  final TextEditingController? controller;
 
-  const QTextField({
-    Key? key,
-    required this.label,
-    this.id,
-    this.value,
-    this.validator,
-    this.hint,
-    this.helper,
-    this.maxLength,
-    required this.onChanged,
-    this.onSubmitted,
-    this.obscure = false,
-    this.enabled = true,
-    this.prefixIcon,
-    this.suffixIcon,
-  }) : super(key: key);
+  const QTextField(
+      {Key? key,
+      required this.label,
+      this.id,
+      this.value,
+      this.validator,
+      this.hint,
+      this.helper,
+      this.maxLength,
+      this.onChanged,
+      this.onSubmitted,
+      this.obscure = false,
+      this.enabled = true,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.controller})
+      : super(key: key);
 
   @override
   State<QTextField> createState() => _QTextFieldState();
@@ -71,16 +73,14 @@ class _QTextFieldState extends State<QTextField> {
       ),
       child: TextFormField(
         enabled: widget.enabled,
-        controller: textEditingController,
+        controller: widget.controller,
         focusNode: focusNode,
         validator: widget.validator,
         maxLength: widget.maxLength,
         obscureText: widget.obscure,
         decoration: InputDecoration(
           labelText: widget.label,
-          suffixIcon: Icon(
-            widget.suffixIcon,
-          ),
+          suffixIcon: widget.suffixIcon,
           helperText: widget.helper,
           hintText: widget.hint,
           border: OutlineInputBorder(
@@ -92,7 +92,7 @@ class _QTextFieldState extends State<QTextField> {
           ),
         ),
         onChanged: (value) {
-          widget.onChanged(value);
+          widget.onChanged!(value);
         },
         onFieldSubmitted: (value) {
           if (widget.onSubmitted != null) widget.onSubmitted!(value);

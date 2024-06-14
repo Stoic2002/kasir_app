@@ -7,7 +7,9 @@ import 'package:kasir_app/features/income/presentetion/pages/income_page.dart';
 import 'package:kasir_app/features/profile/presentetion/pages/profile_page.dart';
 
 class BasicMainNavigationView extends StatefulWidget {
-  const BasicMainNavigationView({Key? key}) : super(key: key);
+  final int currentTab;
+  const BasicMainNavigationView({Key? key, required this.currentTab})
+      : super(key: key);
 
   @override
   State<BasicMainNavigationView> createState() =>
@@ -24,6 +26,13 @@ class _BasicMainNavigationViewState extends State<BasicMainNavigationView> {
     HistoryPage(),
     ProfilePage()
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _selectedIndex = widget.currentTab;
+    super.initState();
+  }
 
   void _onItemTapped(int index) {
     setState(() {

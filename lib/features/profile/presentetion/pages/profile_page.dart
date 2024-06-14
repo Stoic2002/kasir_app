@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kasir_app/core/router/router_constants.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -136,12 +139,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               Divider(),
               ListTile(
-                title: Text('Storage'),
+                title: Text('Logout'),
                 trailing: Icon(
                   Icons.chevron_right,
                   size: 24.0,
                 ),
-                onTap: () {},
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                  context.goNamed(RouteConstants.login);
+                },
               ),
               const SizedBox(height: 80.0),
             ],

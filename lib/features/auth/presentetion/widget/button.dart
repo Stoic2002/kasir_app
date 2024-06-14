@@ -3,7 +3,7 @@ import 'package:kasir_app/core/constants/app_colors.dart';
 
 class QButton extends StatelessWidget {
   final String label;
-  final Function onPressed;
+  final void Function()? onPressed;
   final double? width;
   final double? height;
   final IconData? icon;
@@ -45,7 +45,7 @@ class QButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(13.0),
           ),
         ),
-        onPressed: () => onPressed(),
+        onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
