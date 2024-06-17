@@ -40,29 +40,11 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                H4(
-                    title: 'Populer',
-                    subtitle: 'See more',
-                    onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                          )
-                        }),
+                H4(title: 'Populer', subtitle: 'See more', onPressed: () => {}),
                 const SizedBox(height: 10.0),
-                FoodListView(),
+                Container(height: 200, child: FoodListView()),
                 const SizedBox(height: 20.0),
-                H4(
-                    title: 'Minuman',
-                    subtitle: 'See more',
-                    onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomePage()),
-                          )
-                        }),
+                H4(title: 'Minuman', subtitle: 'See more', onPressed: () => {}),
                 const SizedBox(height: 10.0),
                 FoodListView(),
                 const SizedBox(height: 70.0),

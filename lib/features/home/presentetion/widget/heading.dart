@@ -102,8 +102,8 @@ Widget H4({
   return HeadingWidget(
     title: title,
     subtitle: subtitle,
-    titleFontSize: 20,
-    subtitleFontSize: 16,
+    titleFontSize: 14,
+    subtitleFontSize: 12,
     onPressed: onPressed,
   );
 }

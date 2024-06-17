@@ -91,12 +91,6 @@ class _QTextFieldState extends State<QTextField> {
             ),
           ),
         ),
-        onChanged: (value) {
-          widget.onChanged!(value);
-        },
-        onFieldSubmitted: (value) {
-          if (widget.onSubmitted != null) widget.onSubmitted!(value);
-        },
       ),
     );
   }

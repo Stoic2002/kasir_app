@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kasir_app/core/constants/app_colors.dart';
 
 class SearchField extends StatefulWidget {
   final String? hint;
@@ -44,11 +45,11 @@ class _SearchFieldState extends State<SearchField> {
         decoration: InputDecoration(
           hintText: widget.hint,
           filled: true,
-          fillColor: Colors.grey[300],
+          fillColor: AppColors.halfPurple,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
             borderSide: BorderSide(
-              color: Colors.grey[300]!,
+              color: AppColors.halfPurple,
             ),
           ),
           focusedBorder: OutlineInputBorder(

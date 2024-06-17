@@ -4,7 +4,12 @@ import 'package:kasir_app/core/router/router_constants.dart';
 import 'package:kasir_app/features/auth/presentetion/pages/login_page.dart';
 import 'package:kasir_app/features/auth/presentetion/pages/register_page.dart';
 import 'package:kasir_app/features/auth/presentetion/pages/splash_screen_page.dart';
+import 'package:kasir_app/features/history/data/models/transaction_model.dart';
+import 'package:kasir_app/features/history/presentetion/pages/transaction_page.dart';
+import 'package:kasir_app/features/home/data/models/product_model.dart';
 import 'package:kasir_app/features/home/presentetion/pages/main_navigation.dart';
+import 'package:kasir_app/features/transaction/presentetion/pages/product_page.dart';
+import 'package:kasir_app/features/transaction/presentetion/pages/yourbag_page.dart';
 
 part 'enums/root_tab.dart';
 part 'models/path_parameters.dart';
@@ -41,7 +46,34 @@ class AppRouter {
                 currentTab: tab,
               );
             },
-            routes: [])
+            routes: [
+              GoRoute(
+                name: RouteConstants.detailProduct,
+                path: RouteConstants.detailProductPath,
+                builder: (context, state) {
+                  ProductModel model = state.extra as ProductModel;
+
+                  return ProductPage(
+                    productModel: model,
+                  );
+                },
+              ),
+              GoRoute(
+                name: RouteConstants.order,
+                path: RouteConstants.orderPath,
+                builder: (context, state) {
+                  return YourbagPage();
+                },
+              ),
+              GoRoute(
+                name: RouteConstants.txDetail,
+                path: RouteConstants.txDetailPath,
+                builder: (context, state) {
+                  TransactionModel model = state.extra as TransactionModel;
+                  return TransactionPage(txModel: model);
+                },
+              ),
+            ])
       ],
       errorPageBuilder: (context, state) {
         return MaterialPage(

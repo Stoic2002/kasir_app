@@ -36,8 +36,20 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/drink.jpg
+  AssetGenImage get drink => const AssetGenImage('assets/images/drink.jpg');
+
+  /// File path: assets/images/food.jpg
+  AssetGenImage get food => const AssetGenImage('assets/images/food.jpg');
+
+  /// File path: assets/images/liquor.jpg
+  AssetGenImage get liquor => const AssetGenImage('assets/images/liquor.jpg');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/snacks.jpg
+  AssetGenImage get snacks => const AssetGenImage('assets/images/snacks.jpg');
 
   /// File path: assets/images/splash_screen.png
   AssetGenImage get splashScreen =>
@@ -56,8 +68,17 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/splash_screen3.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [logo, splashScreen, splashScreen1, splashScreen2, splashScreen3];
+  List<AssetGenImage> get values => [
+        drink,
+        food,
+        liquor,
+        logo,
+        snacks,
+        splashScreen,
+        splashScreen1,
+        splashScreen2,
+        splashScreen3
+      ];
 }
 
 class Assets {

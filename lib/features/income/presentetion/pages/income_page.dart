@@ -23,21 +23,21 @@ class _IncomePageState extends State<IncomePage> {
             Text(
               "This Month",
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               "€ 5143.00",
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 14.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               "30 Days / 31 Days",
               style: TextStyle(
-                fontSize: 16.0,
+                fontSize: 12.0,
                 color: Colors.grey,
               ),
             ),

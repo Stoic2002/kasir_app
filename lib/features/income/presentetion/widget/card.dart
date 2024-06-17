@@ -24,7 +24,7 @@ class TransactionCard extends StatelessWidget {
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 14,
           ),
         ),
         SizedBox(height: 5),
@@ -35,7 +35,7 @@ class TransactionCard extends StatelessWidget {
                 borderRadius: BorderRadius.all(
                   Radius.circular(15.0),
                 ),
-                color: AppColors.color04),
+                color: AppColors.halfPurple),
             padding: EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -46,7 +46,7 @@ class TransactionCard extends StatelessWidget {
                     Text(
                       subtitle,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ],
@@ -55,7 +55,7 @@ class TransactionCard extends StatelessWidget {
                   amount,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 16,
                   ),
                 ),
               ],

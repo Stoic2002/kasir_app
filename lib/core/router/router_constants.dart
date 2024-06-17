@@ -20,10 +20,13 @@ class RouteConstants {
   // dashboard page
   static const String root = 'root';
   static const String rootPath = '/:root_tab';
-  // catergory page
-  static const String categories = 'categories';
-  static const String categoriesPath = 'categories';
-  // detail product
-  static const String product = 'product';
-  static const String productPath = 'product';
+  // detail prod
+  static const String detailProduct = 'detail';
+  static const String detailProductPath = 'detail';
+  // order page
+  static const String order = 'order';
+  static const String orderPath = 'order';
+  //detail transaction
+  static const String txDetail = 'txDetail';
+  static const String txDetailPath = 'txDetail';
 }

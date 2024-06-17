@@ -86,13 +86,13 @@ class FoodListView extends StatelessWidget {
                         Text(
                           food["nama"],
                           style: TextStyle(
-                            fontSize: 15.0,
+                            fontSize: 12.0,
                           ),
                         ),
                         Text(
                           "Rp ${NumberFormat("#,##0", "id_ID").format(food["harga"])}",
                           style: TextStyle(
-                            fontSize: 17.0,
+                            fontSize: 14.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

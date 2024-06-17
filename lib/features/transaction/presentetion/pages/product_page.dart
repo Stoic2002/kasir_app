@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:kasir_app/core/extension/int_ext.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
+import 'package:kasir_app/features/home/data/models/product_model.dart';
+import 'package:kasir_app/features/transaction/presentetion/bloc/checkout/checkout_bloc.dart';
+
+import 'package:kasir_app/features/transaction/presentetion/widget/show_selected_product.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final ProductModel productModel;
+
+  const ProductPage({super.key, required this.productModel});
 
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  bool isRegular = false;
-  bool isSpicy = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Mie Ayam',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            'Detail Product',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           leading: IconButton(
             icon: Icon(
@@ -31,152 +37,116 @@ class _ProductPageState extends State<ProductPage> {
           ),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Container(
-                height: 260.0,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWllJTIwYXlhbXxlbnwwfHwwfHx8MA%3D%3D",
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(left: 15, right: 15),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 260.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: widget.productModel.image,
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      20.0,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        9.0,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 25.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Jumlah",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 14,
-                          child: Icon(
-                            Icons.remove,
-                            color: Colors.blue,
-                            size: 20,
-                          ),
-                        ),
-                        const SizedBox(width: 10.0),
-                        Text('1'),
-                        const SizedBox(width: 10.0),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 14,
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.blue,
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    Text(
-                      "Type",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(
-                              activeColor: Color(0xFF6C63FF),
-                              value: isRegular,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  isRegular = value ?? false;
-                                  if (isRegular) {
-                                    isSpicy = false; // Uncheck the other option
-                                  }
-                                });
-                              },
-                            ),
-                            Text('Reguler', style: TextStyle(fontSize: 16)),
-                          ],
-                        ),
-                        SizedBox(width: 20),
-                        Row(
-                          children: [
-                            Checkbox(
-                              value: isSpicy,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  isSpicy = value ?? false;
-                                  if (isSpicy) {
-                                    isRegular =
-                                        false; // Uncheck the other option
-                                  }
-                                });
-                              },
-                            ),
-                            Text('Pedas', style: TextStyle(fontSize: 16)),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15.0),
-                    Text(
-                      "Level Kepedasan",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 14,
-                          child: Icon(
-                            Icons.remove,
-                            color: Colors.blue,
-                            size: 20,
-                          ),
-                        ),
-                        const SizedBox(width: 10.0),
-                        Text('1'),
-                        const SizedBox(width: 10.0),
-                        CircleAvatar(
-                          backgroundColor: Colors.grey[300],
-                          radius: 14,
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.blue,
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                const SizedBox(height: 30.0),
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    widget.productModel.name,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
-              Spacer(),
-              QButton(label: 'Checkout', onPressed: () => {}),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 24,
+                  width: double.infinity,
+                  child: SizedBox(
+                    height: 24,
+                    width: 159,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.list_rounded,
+                          size: 24,
+                        ),
+                        SizedBox(
+                          width: 9,
+                        ),
+                        Text(
+                          'product ${widget.productModel.categoryName}',
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: 106,
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        width: 24,
+                        height: 106,
+                        child: Icon(
+                          Icons.description_outlined,
+                          size: 24,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 9,
+                      ),
+                      Container(
+                        width: 307,
+                        height: 106,
+                        child: Text(widget.productModel.description,
+                            style: TextStyle(fontSize: 16)),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 44,
+                  child: Text(
+                    widget.productModel.price.currencyFormatRp,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15.0),
+                QButton(
+                    label: 'add to bag',
+                    onPressed: () {
+                      context
+                          .read<CheckoutBloc>()
+                          .add(AddProduct(product: widget.productModel));
+                      ShowSelectedProduct().showSelectedProducts(context);
+                    }),
+              ],
+            ),
           ),
         ));
   }

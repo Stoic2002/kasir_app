@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kasir_app/features/history/presentetion/pages/transaction_page.dart';
-import 'package:kasir_app/features/income/presentetion/widget/transaction_list_item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kasir_app/core/extension/int_ext.dart';
+import 'package:kasir_app/core/router/app_router.dart';
+import 'package:kasir_app/core/router/router_constants.dart';
+
+import 'package:kasir_app/features/history/presentetion/bloc/transaction/transaction_bloc.dart';
+import 'package:kasir_app/features/transaction/data/models/order_model.dart';
+import 'package:kasir_app/features/transaction/presentetion/bloc/order/order_bloc.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -11,12 +18,31 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    context.read<TransactionBloc>().add(TransactionLoad());
+    // context.read<OrderBloc>().stream.listen((state) {
+    //   if (state is OrderLoaded) {
+    //     _refreshTransactions();
+    //   }
+    // });
+
+    super.initState();
+  }
+
+  // void _refreshTransactions() {
+  //   // Lakukan logika untuk menambahkan orderData ke daftar transaksi
+  //   final currentTransactions = context.read<TransactionBloc>().state;
+  //   if (currentTransactions is TransactionLoaded) {
+  //     final updatedTransactions = [...currentTransactions.transaction];
+  //     context
+  //         .read<TransactionBloc>()
+  //         .add(TransactionRefresh(transactions: updatedTransactions));
+  //   }
+  // }
+
+  @override
   Widget build(BuildContext context) {
-    final List<Transaction> transactions = List.generate(
-      3,
-      (index) => Transaction(
-          id: 'Transaction 0${3 - index}', time: '30 Mei 2024', total: 12.00),
-    );
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -25,60 +51,111 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
           centerTitle: true,
           automaticallyImplyLeading: false),
-      body: SingleChildScrollView(
-        controller: ScrollController(),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Today',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 5),
-              Column(
-                children: transactions.map((transaction) {
-                  return TransactionListItem(
-                    transaction: transaction,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TransactionPage()),
-                      );
-                    },
-                  );
-                }).toList(),
-              ),
-              Text(
-                'Yesterday',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 5),
-              Column(
-                children: transactions.map((transaction) {
-                  return TransactionListItem(
-                      transaction: transaction,
+      body: BlocConsumer<TransactionBloc, TransactionState>(
+        listener: (context, state) {
+          if (state is TransactionFailure) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
+          }
+
+          if (state is TransactionLoaded) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('loaded')));
+          }
+        },
+        builder: (context, state) {
+          if (state is TransactionLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is TransactionLoaded) {
+            return Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              width: double.infinity,
+              height: 630,
+              child: ListView.builder(
+                  itemCount: state.transaction.length,
+                  itemBuilder: (context, index) {
+                    final tx = state.transaction[index];
+
+                    return InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TransactionPage()),
-                        );
-                      });
-                }).toList(),
-              ),
-              const SizedBox(height: 60.0),
-            ],
-          ),
-        ),
+                        context.pushNamed(RouteConstants.txDetail,
+                            pathParameters: PathParameters().toMap(),
+                            extra: tx);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12.0),
+                                    ),
+                                    color: Colors.grey[200],
+                                  ),
+                                  child: Icon(Icons.image,
+                                      color: Colors.grey[700]),
+                                ),
+                                SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'No. ${tx.transactionId.toString()}',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      tx.createdAt,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    Container(
+                                      width: 200,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Total",
+                                            style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            tx.subTotal.currencyFormatRp,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }

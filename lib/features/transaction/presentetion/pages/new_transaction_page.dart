@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:kasir_app/core/constants/app_colors.dart';
+import 'package:kasir_app/features/home/data/datasources/data_product.dart';
+import 'package:kasir_app/features/home/data/models/category_model.dart';
+import 'package:kasir_app/features/home/data/models/product_model.dart';
 import 'package:kasir_app/features/home/presentetion/widget/search_field.dart';
 import 'package:kasir_app/features/transaction/presentetion/widget/gridview_product.dart';
 
@@ -18,149 +21,159 @@ class _NewTransactionPageState extends State<NewTransactionPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    final List<CategoryModel> categories = DataProduct().categories;
+    _tabController = TabController(length: categories.length, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<CategoryModel> categories = DataProduct().categories;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 20.0),
-              SearchField(
-                hint: 'Minuman',
-                onChanged: (value) {
-                  print('Search query: $value');
-                },
-                onSubmitted: (value) {
-                  print('Submitted query: $value');
-                },
-              ),
-              const SizedBox(height: 10.0),
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1.0,
-                        color: Colors.grey[900]!,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16.0),
-                      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 20.0),
+            SearchField(
+              hint: 'Minuman',
+              onChanged: (value) {
+                print('Search query: $value');
+              },
+              onSubmitted: (value) {
+                print('Submitted query: $value');
+              },
+            ),
+            const SizedBox(height: 10.0),
+            Row(
+              children: [
+                Container(
+                  width: 102,
+                  height: 36,
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1.0,
+                      color: AppColors.grey,
                     ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.swap_vert,
-                          size: 24.0,
-                        ),
-                        DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            hint: Text('Sort'),
-                            icon: Icon(Icons.keyboard_arrow_down,
-                                color: Colors.black),
-                            value: _selectedValue,
-                            items: <String>[
-                              'Option 1',
-                              'Option 2',
-                              'Option 3',
-                              'Option 4'
-                            ].map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedValue = newValue;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.0),
                     ),
                   ),
-                  Spacer(),
-                  Container(
-                    padding: const EdgeInsets.all(9.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 1.0,
-                        color: Colors.grey[900]!,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.swap_vert,
+                        size: 18.0,
+                        color: AppColors.grey2,
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16.0),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.filter_list,
-                          size: 24.0,
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          style: TextStyle(fontSize: 11, color: Colors.black),
+                          hint: Text(
+                            'Sort',
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          icon: Icon(Icons.keyboard_arrow_down,
+                              color: AppColors.grey),
+                          value: _selectedValue,
+                          items: <String>[
+                            'Option 1',
+                            'Option 2',
+                            'Option 3',
+                            'Option 4'
+                          ].map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedValue = newValue;
+                            });
+                          },
                         ),
-                        const SizedBox(width: 5.0),
-                        Text(
-                          "Filter",
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  width: 111,
+                  height: 36,
+                  padding: const EdgeInsets.all(9.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1.0,
+                      color: AppColors.grey,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16.0),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.filter_list,
+                        size: 18.0,
+                        color: AppColors.grey2,
+                      ),
+                      const SizedBox(width: 5.0),
+                      Text(
+                        "Filter",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        radius: 14.0,
+                        child: Text(
+                          "2",
                           style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 14.0,
+                            color: Colors.white,
                           ),
                         ),
-                        const SizedBox(width: 10.0),
-                        CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          radius: 14.0,
-                          child: Text(
-                            "2",
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 15.0),
+            TabBar(
+              controller: _tabController,
+              dividerHeight: 0,
+              indicatorColor: Colors.transparent,
+              labelStyle: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 15.0),
-              TabBar(
+              unselectedLabelStyle: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+              ),
+              tabs: categories
+                  .map((category) => Tab(
+                        child: Text(
+                          category.categoryName,
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: 10.0),
+            Expanded(
+              child: TabBarView(
                 controller: _tabController,
-                dividerHeight: 0,
-                indicatorColor: Colors.transparent,
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-                unselectedLabelStyle: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
-                ),
-                tabs: [
-                  Tab(
-                      child: Text('Minuman',
-                          style: TextStyle(color: Colors.black))),
-                  Tab(
-                      child: Text('Makanan',
-                          style: TextStyle(color: Colors.black))),
-                  Tab(
-                      child: Text('Cemilan',
-                          style: TextStyle(color: Colors.black))),
-                  Tab(
-                      child: Text('Masakan',
-                          style: TextStyle(color: Colors.black))),
-                ],
+                children: categories.map((category) {
+                  return GridviewProduct(products: category.productModel);
+                }).toList(),
               ),
-              const SizedBox(height: 10.0),
-              GridviewProduct(),
-              const SizedBox(height: 60.0),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -109,7 +109,7 @@ class CustomBarChart extends StatelessWidget {
 
   LinearGradient get _barsGradient => LinearGradient(
         colors: [
-          AppColors.color04,
+          AppColors.halfPurple,
           AppColors.color02,
         ],
         begin: Alignment.bottomCenter,
