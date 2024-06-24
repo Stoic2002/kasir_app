@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:kasir_app/features/home/data/models/product_model.dart';
+
+import 'package:kasir_app/features/home/data/models/product_new_model.dart';
 import 'package:kasir_app/features/home/data/models/quantity_model.dart';
 import 'package:meta/meta.dart';
 

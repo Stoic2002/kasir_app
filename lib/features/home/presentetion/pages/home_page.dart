@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:kasir_app/core/constants/app_colors.dart';
+import 'package:kasir_app/core/router/app_router.dart';
+import 'package:kasir_app/core/router/router_constants.dart';
 
 import 'package:kasir_app/features/home/presentetion/widget/carousel.dart';
+import 'package:kasir_app/features/home/presentetion/widget/drink_listview.dart';
 import 'package:kasir_app/features/home/presentetion/widget/food_listview.dart';
 import 'package:kasir_app/features/home/presentetion/widget/heading.dart';
 import 'package:kasir_app/features/home/presentetion/widget/search_field.dart';
@@ -16,19 +21,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.pushNamed(
+            RouteConstants.addProduct,
+            pathParameters: PathParameters().toMap(),
+          );
+        },
+        backgroundColor: AppColors.primaryColor,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 const SizedBox(height: 20.0),
-                SearchField(
-                  onChanged: (value) {
-                    print('Search query: $value');
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(RouteConstants.searchProduct,
+                        pathParameters: PathParameters().toMap());
                   },
-                  onSubmitted: (value) {
-                    print('Submitted query: $value');
-                  },
+                  child: AbsorbPointer(child: SearchField()),
                 ),
                 QCarousel(
                   images: [
@@ -40,13 +59,13 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                H4(title: 'Populer', subtitle: 'See more', onPressed: () => {}),
+                H4(title: 'Makanan', subtitle: 'See more', onPressed: () => {}),
                 const SizedBox(height: 10.0),
                 Container(height: 200, child: FoodListView()),
                 const SizedBox(height: 20.0),
                 H4(title: 'Minuman', subtitle: 'See more', onPressed: () => {}),
                 const SizedBox(height: 10.0),
-                FoodListView(),
+                DrinkListView(),
                 const SizedBox(height: 70.0),
               ],
             )),

@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kasir_app/core/constants/app_colors.dart';
+import 'package:kasir_app/core/router/app_router.dart';
+import 'package:kasir_app/core/router/router_constants.dart';
 import 'package:kasir_app/features/home/data/datasources/data_product.dart';
 import 'package:kasir_app/features/home/data/models/category_model.dart';
-import 'package:kasir_app/features/home/data/models/product_model.dart';
-import 'package:kasir_app/features/home/presentetion/widget/search_field.dart';
-import 'package:kasir_app/features/transaction/presentetion/widget/gridview_product.dart';
 
-class NewTransactionPage extends StatefulWidget {
-  const NewTransactionPage({super.key});
+import 'package:kasir_app/features/home/presentetion/widget/search_field.dart';
+import 'package:kasir_app/features/transaction/presentetion/widget/gridview_drink_product.dart';
+import 'package:kasir_app/features/transaction/presentetion/widget/gridview_food_product.dart';
+import 'package:kasir_app/features/transaction/presentetion/widget/gridview_liquor_product.dart';
+import 'package:kasir_app/features/transaction/presentetion/widget/gridview_snacks_product.dart';
+
+class NewTransactionPageX extends StatefulWidget {
+  const NewTransactionPageX({super.key});
 
   @override
-  State<NewTransactionPage> createState() => _NewTransactionPageState();
+  State<NewTransactionPageX> createState() => _NewTransactionPageXState();
 }
 
-class _NewTransactionPageState extends State<NewTransactionPage>
+class _NewTransactionPageXState extends State<NewTransactionPageX>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String? _selectedValue;
@@ -34,20 +40,22 @@ class _NewTransactionPageState extends State<NewTransactionPage>
         child: Column(
           children: [
             const SizedBox(height: 20.0),
-            SearchField(
-              hint: 'Minuman',
-              onChanged: (value) {
-                print('Search query: $value');
+            GestureDetector(
+              onTap: () {
+                context.pushNamed(RouteConstants.searchProduct,
+                    pathParameters: PathParameters().toMap());
               },
-              onSubmitted: (value) {
-                print('Submitted query: $value');
-              },
+              child: AbsorbPointer(
+                child: SearchField(
+                  hint: 'Minuman',
+                ),
+              ),
             ),
             const SizedBox(height: 10.0),
             Row(
               children: [
                 Container(
-                  width: 102,
+                  width: 108,
                   height: 36,
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   decoration: BoxDecoration(
@@ -70,17 +78,15 @@ class _NewTransactionPageState extends State<NewTransactionPage>
                         child: DropdownButton<String>(
                           style: TextStyle(fontSize: 11, color: Colors.black),
                           hint: Text(
-                            'Sort',
+                            'Default',
                             style: TextStyle(fontSize: 12),
                           ),
                           icon: Icon(Icons.keyboard_arrow_down,
                               color: AppColors.grey),
                           value: _selectedValue,
                           items: <String>[
-                            'Option 1',
-                            'Option 2',
-                            'Option 3',
-                            'Option 4'
+                            'Termurah',
+                            'Termahal',
                           ].map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -92,49 +98,6 @@ class _NewTransactionPageState extends State<NewTransactionPage>
                               _selectedValue = newValue;
                             });
                           },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  width: 111,
-                  height: 36,
-                  padding: const EdgeInsets.all(9.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1.0,
-                      color: AppColors.grey,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(16.0),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.filter_list,
-                        size: 18.0,
-                        color: AppColors.grey2,
-                      ),
-                      const SizedBox(width: 5.0),
-                      Text(
-                        "Filter",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 14.0,
-                        child: Text(
-                          "2",
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.white,
-                          ),
                         ),
                       ),
                     ],
@@ -166,12 +129,12 @@ class _NewTransactionPageState extends State<NewTransactionPage>
             ),
             const SizedBox(height: 10.0),
             Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: categories.map((category) {
-                  return GridviewProduct(products: category.productModel);
-                }).toList(),
-              ),
+              child: TabBarView(controller: _tabController, children: [
+                GridviewFoodProduct(),
+                GridviewDrinkProduct(),
+                GridviewSnacksProduct(),
+                GridviewLiquorProduct()
+              ]),
             ),
           ],
         ),

@@ -44,6 +44,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
                   (e) => ProductsModel(
                     productId: e.product.id,
                     productName: e.product.name,
+                    imageUrl: e.product.imageUrl,
                     productPrice: e.product.price,
                     quantity: e.quantity,
                   ),

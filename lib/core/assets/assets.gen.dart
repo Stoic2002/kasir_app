@@ -48,6 +48,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/placeholder.png
+  AssetGenImage get placeholder =>
+      const AssetGenImage('assets/images/placeholder.png');
+
   /// File path: assets/images/snacks.jpg
   AssetGenImage get snacks => const AssetGenImage('assets/images/snacks.jpg');
 
@@ -73,6 +77,7 @@ class $AssetsImagesGen {
         food,
         liquor,
         logo,
+        placeholder,
         snacks,
         splashScreen,
         splashScreen1,

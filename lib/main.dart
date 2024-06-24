@@ -13,8 +13,15 @@ import 'package:kasir_app/features/auth/presentetion/bloc/register/register_bloc
 import 'package:kasir_app/features/history/data/datasources/history_transaction_repository.dart';
 
 import 'package:kasir_app/features/history/presentetion/bloc/transaction/transaction_bloc.dart';
+import 'package:kasir_app/features/home/data/datasources/firebase_repo.dart';
+import 'package:kasir_app/features/home/presentetion/bloc/product/product_bloc.dart';
+import 'package:kasir_app/features/home/presentetion/bloc/search/search_bloc.dart';
+import 'package:kasir_app/features/income/data/datasources/income_repo.dart';
+import 'package:kasir_app/features/income/presentetion/bloc/income/income_bloc.dart';
 import 'package:kasir_app/features/transaction/data/datasource/order_datasource.dart';
 import 'package:kasir_app/features/transaction/presentetion/bloc/checkout/checkout_bloc.dart';
+import 'package:kasir_app/features/transaction/presentetion/bloc/getcategory/getcategory_bloc.dart';
+import 'package:kasir_app/features/transaction/presentetion/bloc/getproduct/getproduct_bloc.dart';
 import 'package:kasir_app/features/transaction/presentetion/bloc/order/order_bloc.dart';
 
 import 'package:kasir_app/firebase_options.dart';
@@ -51,6 +58,18 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TransactionBloc(HistoryRepo()),
+        ),
+        BlocProvider(
+          create: (context) => ProductBloc(FirebaseRepo()),
+        ),
+        BlocProvider(
+          create: (context) => GetproductBloc(OrderDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => SearchBloc(FirebaseRepo()),
+        ),
+        BlocProvider(
+          create: (context) => IncomeBloc(IncomeRepo()),
         ),
       ],
       child: MaterialApp.router(

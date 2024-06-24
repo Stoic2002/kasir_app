@@ -48,8 +48,8 @@ class ProductItemShow extends StatelessWidget {
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(9),
                                 image: DecorationImage(
-                                    image:
-                                        state.products[index].product.image)),
+                                    image: NetworkImage(state
+                                        .products[index].product.imageUrl))),
                           ),
                           Container(
                             width: 250,

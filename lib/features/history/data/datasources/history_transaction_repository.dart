@@ -7,7 +7,10 @@ class HistoryRepo {
       FirebaseFirestore.instance.collection('orders');
 
   Stream<List<TransactionModel>> getTransaction() {
-    return ordersCollection.snapshots().map((snapshot) {
+    return ordersCollection
+        .orderBy('order_at', descending: true)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
@@ -16,6 +19,7 @@ class HistoryRepo {
           return ProductsModel(
             productId: productData['productId'],
             productName: productData['name'],
+            imageUrl: productData['imageUrl'],
             quantity: productData['quantity'],
             productPrice: productData['price'],
           );

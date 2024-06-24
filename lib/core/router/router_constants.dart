@@ -29,4 +29,13 @@ class RouteConstants {
   //detail transaction
   static const String txDetail = 'txDetail';
   static const String txDetailPath = 'txDetail';
+  //add product
+  static const String addProduct = 'addProduct';
+  static const String addProductPath = 'addProduct';
+  //search product
+  static const String searchProduct = 'search';
+  static const String searchProductPath = 'search';
+  //detail search product
+  static const String searchProductDetail = 'searchDetail';
+  static const String searchProductDetailPath = 'searchDetail';
 }

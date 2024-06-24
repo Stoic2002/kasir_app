@@ -6,7 +6,7 @@ class DataProduct {
   final List<CategoryModel> categories = [
     CategoryModel(
       categoryId: 1,
-      categoryName: 'makanan',
+      categoryName: 'Makanan',
       productModel: [
         ProductModel(
             id: 001,
@@ -38,7 +38,7 @@ class DataProduct {
     ),
     CategoryModel(
       categoryId: 2,
-      categoryName: 'minuman',
+      categoryName: 'Minuman',
       productModel: [
         ProductModel(
             id: 005,

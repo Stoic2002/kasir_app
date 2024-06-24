@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kasir_app/core/constants/app_colors.dart';
+import 'package:kasir_app/core/router/app_router.dart';
+import 'package:kasir_app/core/router/router_constants.dart';
 
 class SearchField extends StatefulWidget {
   final String? hint;
   final String? initialValue;
   final bool enabled;
-  final Function(String) onChanged;
-  final Function(String)? onSubmitted;
+  final TextEditingController? controller;
   final double height;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
 
   const SearchField({
     Key? key,
     this.hint = 'Search',
     this.initialValue,
+    this.controller,
+    this.focusNode,
+    this.onChanged,
     this.enabled = true,
-    required this.onChanged,
-    this.onSubmitted,
     this.height = 48.0,
   }) : super(key: key);
 
@@ -24,14 +29,6 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-  TextEditingController _textEditingController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _textEditingController.text = widget.initialValue ?? "";
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,8 +37,10 @@ class _SearchFieldState extends State<SearchField> {
       ),
       height: widget.height,
       child: TextField(
+        focusNode: widget.focusNode,
         enabled: widget.enabled,
-        controller: _textEditingController,
+        onChanged: widget.onChanged,
+        controller: widget.controller,
         decoration: InputDecoration(
           hintText: widget.hint,
           filled: true,
@@ -61,12 +60,6 @@ class _SearchFieldState extends State<SearchField> {
           ),
           contentPadding: EdgeInsets.symmetric(vertical: widget.height / 4),
         ),
-        onChanged: (value) {
-          widget.onChanged(value);
-        },
-        onSubmitted: (value) {
-          if (widget.onSubmitted != null) widget.onSubmitted!(value);
-        },
       ),
     );
   }

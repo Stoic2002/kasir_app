@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductsModel {
-  final int productId;
+  final String productId;
   final String productName;
+  final String imageUrl;
   final int productPrice;
   final int quantity;
 
   ProductsModel(
       {required this.productId,
       required this.quantity,
+      required this.imageUrl,
       required this.productName,
       required this.productPrice});
 
@@ -18,6 +20,7 @@ class ProductsModel {
     return ProductsModel(
       productId: snapshot['productId'],
       productName: snapshot['name'],
+      imageUrl: snapshot['imageUrl'],
       productPrice: snapshot['price'],
       quantity: snapshot['quantity'],
     );
@@ -26,6 +29,7 @@ class ProductsModel {
   Map<String, dynamic> toJson() => {
         "productId": productId,
         "name": productName,
+        "imageUrl": imageUrl,
         "price": productPrice,
         "quantity": quantity,
       };

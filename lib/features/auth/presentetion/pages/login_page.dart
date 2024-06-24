@@ -5,7 +5,7 @@ import 'package:kasir_app/core/assets/assets.gen.dart';
 import 'package:kasir_app/core/router/app_router.dart';
 import 'package:kasir_app/core/router/router_constants.dart';
 import 'package:kasir_app/features/auth/presentetion/bloc/login/login_bloc.dart';
-import 'package:kasir_app/features/auth/presentetion/pages/register_page.dart';
+
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/text_field.dart';
 

@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kasir_app/core/components/circle_loading.dart';
-import 'package:kasir_app/core/router/router_constants.dart';
+
 import 'package:kasir_app/features/auth/data/models/user_model.dart';
 import 'package:kasir_app/features/auth/presentetion/bloc/register/register_bloc.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';

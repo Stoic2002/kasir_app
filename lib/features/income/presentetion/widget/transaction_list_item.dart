@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:kasir_app/core/extension/int_ext.dart';
+import 'package:kasir_app/features/transaction/data/models/order_model.dart';
 
-class Transaction {
-  final String id;
-  final String time;
-  final double total;
+// class Transaction {
+//   final String id;
+//   final String time;
+//   final double total;
 
-  Transaction({
-    required this.id,
-    required this.time,
-    required this.total,
-  });
-}
+//   Transaction({
+//     required this.id,
+//     required this.time,
+//     required this.total,
+//   });
+// }
 
 class TransactionListItem extends StatelessWidget {
-  final Transaction transaction;
+  final OrderModel transaction;
   final VoidCallback? onTap;
 
   TransactionListItem({required this.transaction, this.onTap});
@@ -44,14 +46,14 @@ class TransactionListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      transaction.id,
+                      transaction.transactionId.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      transaction.time,
+                      transaction.createdAt,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
@@ -69,7 +71,7 @@ class TransactionListItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 30.0),
                         Text(
-                          '€ ${transaction.total.toStringAsFixed(2)}',
+                          transaction.subtotal!.currencyFormatRp,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

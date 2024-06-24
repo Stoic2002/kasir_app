@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:kasir_app/core/extension/int_ext.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
 import 'package:kasir_app/features/history/data/models/transaction_model.dart';
-import 'package:kasir_app/features/history/presentetion/widget/transaction_item.dart';
 
 class TransactionPage extends StatefulWidget {
   final TransactionModel txModel;
@@ -57,13 +56,14 @@ class _TransactionPageState extends State<TransactionPage> {
                                     width: 100,
                                     height: 100,
                                     decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(products.imageUrl),
+                                      ),
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(12.0),
                                       ),
                                       color: Colors.grey[200],
                                     ),
-                                    child: Icon(Icons.image,
-                                        color: Colors.grey[700]),
                                   ),
                                   SizedBox(width: 16),
                                   Column(
@@ -99,8 +99,7 @@ class _TransactionPageState extends State<TransactionPage> {
                                               ),
                                             ),
                                             Text(
-                                              products.productPrice
-                                                  .currencyFormatRp,
+                                              '${(products.productPrice * products.quantity).currencyFormatRp}',
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,

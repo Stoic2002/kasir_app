@@ -1,13 +1,13 @@
-import 'package:kasir_app/features/home/data/models/product_model.dart';
+import 'package:kasir_app/features/home/data/models/product_new_model.dart';
 
 class QuantityModel {
-  final ProductModel product;
+  final ProductNewModel product;
   final int quantity;
 
   QuantityModel({required this.product, required this.quantity});
 
   QuantityModel copyWith({
-    ProductModel? product,
+    ProductNewModel? product,
     int? quantity,
   }) {
     return QuantityModel(

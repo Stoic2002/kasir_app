@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:kasir_app/core/extension/int_ext.dart';
 import 'package:kasir_app/features/auth/presentetion/widget/button.dart';
-import 'package:kasir_app/features/home/data/models/product_model.dart';
+
+import 'package:kasir_app/features/home/data/models/product_new_model.dart';
 import 'package:kasir_app/features/transaction/presentetion/bloc/checkout/checkout_bloc.dart';
 
 import 'package:kasir_app/features/transaction/presentetion/widget/show_selected_product.dart';
 
 class ProductPage extends StatefulWidget {
-  final ProductModel productModel;
+  final ProductNewModel productModel;
 
   const ProductPage({super.key, required this.productModel});
 
@@ -49,7 +50,7 @@ class _ProductPageState extends State<ProductPage> {
                   height: 260.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: widget.productModel.image,
+                      image: NetworkImage(widget.productModel.imageUrl),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.all(

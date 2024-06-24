@@ -4,10 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kasir_app/core/extension/int_ext.dart';
 import 'package:kasir_app/core/router/app_router.dart';
 import 'package:kasir_app/core/router/router_constants.dart';
-
 import 'package:kasir_app/features/history/presentetion/bloc/transaction/transaction_bloc.dart';
-import 'package:kasir_app/features/transaction/data/models/order_model.dart';
-import 'package:kasir_app/features/transaction/presentetion/bloc/order/order_bloc.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -21,25 +18,9 @@ class _HistoryPageState extends State<HistoryPage> {
   void initState() {
     // TODO: implement initState
     context.read<TransactionBloc>().add(TransactionLoad());
-    // context.read<OrderBloc>().stream.listen((state) {
-    //   if (state is OrderLoaded) {
-    //     _refreshTransactions();
-    //   }
-    // });
 
     super.initState();
   }
-
-  // void _refreshTransactions() {
-  //   // Lakukan logika untuk menambahkan orderData ke daftar transaksi
-  //   final currentTransactions = context.read<TransactionBloc>().state;
-  //   if (currentTransactions is TransactionLoaded) {
-  //     final updatedTransactions = [...currentTransactions.transaction];
-  //     context
-  //         .read<TransactionBloc>()
-  //         .add(TransactionRefresh(transactions: updatedTransactions));
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +37,6 @@ class _HistoryPageState extends State<HistoryPage> {
           if (state is TransactionFailure) {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(state.message)));
-          }
-
-          if (state is TransactionLoaded) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('loaded')));
           }
         },
         builder: (context, state) {

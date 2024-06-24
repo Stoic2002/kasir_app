@@ -8,7 +8,6 @@ class OrderModel {
   final int? subtotal;
   final String createdAt;
   final DateTime? orderAt;
-
   final List<ProductsModel> products;
 
   OrderModel(

@@ -7,8 +7,6 @@ part 'transaction_event.dart';
 part 'transaction_state.dart';
 
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
-  late Stream<List<TransactionModel>> _transactionStream;
-
   final HistoryRepo historyRepo;
   TransactionBloc(this.historyRepo) : super(TransactionInitial()) {
     on<TransactionLoad>((event, emit) async {
